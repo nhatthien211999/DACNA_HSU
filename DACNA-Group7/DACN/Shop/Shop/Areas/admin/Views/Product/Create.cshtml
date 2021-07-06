@@ -1,0 +1,182 @@
+﻿@model Models.ViewModel.ProductVM
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+    List<SelectListItem> supplier = new List<SelectListItem>();
+    supplier.Add(new SelectListItem { Text = "Apple", Value = "1" });
+    supplier.Add(new SelectListItem { Text = "Samsung", Value = "2" });
+    supplier.Add(new SelectListItem { Text = "Oppo", Value = "3" });
+    supplier.Add(new SelectListItem { Text = "Xiaomi", Value = "4" });
+    supplier.Add(new SelectListItem { Text = "Asus", Value = "5" });
+    supplier.Add(new SelectListItem { Text = "Dell", Value = "6" });
+    supplier.Add(new SelectListItem { Text = "HP", Value = "7" });
+
+
+    List<SelectListItem> category = new List<SelectListItem>();
+    category.Add(new SelectListItem { Text = "Laptop", Value = "1" });
+    category.Add(new SelectListItem { Text = "Smartphone", Value = "2" });
+    category.Add(new SelectListItem { Text = "Watch", Value = "3" });
+    category.Add(new SelectListItem { Text = "Accessories", Value = "4" });
+    category.Add(new SelectListItem { Text = "Camera", Value = "5" });
+}
+@section jsFooter{
+    <script>
+
+        $('#btnSelectImage').on('click', function (e) {
+                e.preventDefault(); // e ? ngăn hoạt động thừa
+                var finder = new CKFinder();
+                finder.selectActionFunction = function (url) {
+                    $('#txtImage').val(url);
+                    $('#imageProduct').append('<div style="float:left"><img src="' + url + '" width="100"/><a href="#" class="btn-delImage"><i class="fa fa-times"></i></a></div>');
+
+                    $('.btn-delImage').off('click').on('click', function (e) {
+                        e.preventDefault();
+                        $(this).parent().remove();
+                        $('txtImage').remove();
+                })
+
+                }
+                finder.popup();
+        });
+
+    </script>
+}
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-4">Thêm mới sản phẩm</h1>
+
+            @using (Html.BeginForm("Create","Product",FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Descriptions, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Descriptions, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Descriptions, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" }, @id = "txtImage" })
+                            <div id="imageProduct">
+
+                            </div>
+
+                            <a id="btnSelectImage" href="#">Chọn ảnh</a>
+                            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IncludeVAT, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(model => model.IncludeVAT)
+                                @Html.ValidationMessageFor(model => model.IncludeVAT, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(model => model.Status)
+                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SupplierID, "Nhà cung cấp", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @Html.DropDownList("SupplierID", supplier, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.SupplierID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CateID, "Danh mục sản phẩm", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @Html.DropDownList("CateID", category, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CateID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+            <div>
+                @Html.ActionLink("Quay lại", "Index")
+            </div>
+
+        </div>
+
+
+    </main>
+    <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Copyright &copy; ELECTRO</div>
+                <div>
+                    <a href="#">Privacy Policy</a>
+                    &middot;
+                    <a href="#">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+</div>
+
+
+

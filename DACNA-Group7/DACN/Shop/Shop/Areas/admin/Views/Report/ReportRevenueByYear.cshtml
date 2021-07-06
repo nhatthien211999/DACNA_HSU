@@ -1,0 +1,84 @@
+﻿@model List<Models.ViewModel.ReportViewModel>
+@{
+    ViewBag.Title = "ReportTopSelling";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-4">Thống kê doanh thu theo năm</h1>
+            <div class="card mb-4">
+
+                <div class="card-body">
+                    @using (Html.BeginForm("ReportRevenueByYear", "Report", FormMethod.Get))
+                    {
+                        <div class="row ">
+                            <div class="col-md-4">
+
+                                <input type="text" id="datetime" name="date" value="@ViewBag.Date" size="40" />
+
+                            </div>
+                            <hr>
+
+                            <div class="col-md-8">
+                                <button type="submit" class="btn btn-success">Chọn ngày</button>
+
+                            </div>
+                        </div>
+
+                    }
+                    <hr />
+                    <table class="table table-striped w-auto">
+
+                        <!--Table head-->
+                        <thead>
+                            <tr>
+
+                                <th>Mã sản phẩm</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Số lượng</th>
+                                <th>Tổng tiền</th>
+                                <th>Tên khách hàng</th>
+                                <th>Địa chỉ</th>
+                                <th>Email</th>
+                                <th>Ngày</th>
+
+
+                            </tr>
+                        </thead>
+                        <!--Table head-->
+                        <!--Table body-->
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="row_@item.OrderID">
+
+                                    <td>@item.ProductCode</td>
+                                    <td>@item.ProductName</td>
+
+
+                                    <td>@item.Quantity</td>
+                                    <td>@item.Total</td>
+
+                                    <td>@item.CustomerName</td>
+                                    <td>@item.CustomerAddress</td>
+                                    <td>@item.CustomerEmail</td>
+                                    <td>@item.CreateDate</td>
+
+                                </tr>
+                            }
+                        </tbody>
+                        <!--Table body-->
+
+
+                    </table>
+
+                </div>
+
+
+            </div>
+        </div>
+    </main>
+
+
+</div>

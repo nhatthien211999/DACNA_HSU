@@ -1,0 +1,98 @@
+﻿
+@{
+    /**/
+
+
+    var countproduct = ViewBag.QuantityProduct;
+    var earnings = ViewBag.Earnings;
+    var users = ViewBag.Users;
+    var orders = ViewBag.Orders;
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid">
+            
+            <h1 class="mt-4">Trang chủ</h1>
+        </div>
+        <div class="row">
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-4">Sản phẩm đã bán</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@countproduct</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-10">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-4">Tổng doanh thu đạt được</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@earnings.ToString("#,##") VND</div>
+                            </div>
+                            <div class="col">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class=" row">
+                            <div class="col-10">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Khách hàng mới</div>
+                                
+                                    <div class="col">
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@users</div>
+                                    </div>                                
+                            </div>
+                            <div class="col">
+                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-3">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class=" row">
+                            <div class="col-8">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Số đơn hàng</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@orders</div>
+                            </div>
+                            <div class="col">
+                                <i class="fas fa-comments fa-2x text-gray-300"></i>
+                            </div>  
+                        </div>                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div id="chartbyday" style="height: 370px; width: 100%;"></div>
+            </div>
+            <div class="col-6">
+                <div id="chartbymonth" style="height: 370px; width: 100%;"></div>
+            </div>
+        </div>
+
+
+    </main>
+
+
+
+</div>

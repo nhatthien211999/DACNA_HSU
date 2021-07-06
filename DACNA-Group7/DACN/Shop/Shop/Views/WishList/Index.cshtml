@@ -1,0 +1,71 @@
+﻿@model List<Models.ViewModel.CartViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-10">
+                <ul class="breadcrumb-tree">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/WishList/Index">Sản phẩm yêu thích</a></li>
+
+
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="products-tabs">
+            <!-- tab -->
+            <div id="tab1" class="tab-pane active">
+                <div class="products-slick" data-nav="#slick-nav-1">
+                    <!-- product -->
+                    @foreach(var item in Model)
+                    {
+                        var link = "/chi-tiet/" + item.product.Code + "-" + item.ID;
+                        <div class="product">
+                            <div class="product-img">
+                                <a href="@link"><img src="@item.product.Image" alt="" width="250" height="200"></a>
+                                <div class="product-label">
+                                    
+                                    <span class="new">NEW</span>
+                                </div>
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">@item.product.Category.Name</p>
+                                <h3 class="product-name"><a href="@link">@item.product.Name</a></h3>
+                                <h4 class="product-price">@item.Price</h4>
+                                <div class="product-rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                
+                            </div>
+                            <div class="add-to-cart">
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i><a href="/them-gio-hang?productId=@item.ID&quantity=1">Thêm vào giỏ</a></button>
+                            </div>
+                        </div>
+                    }
+                    <!-- /product -->
+                </div>
+                <div id="slick-nav-1" class="products-slick-nav"></div>
+            </div>
+            <!-- /tab -->
+        </div>
+    </div>
+</div>
+
+
+

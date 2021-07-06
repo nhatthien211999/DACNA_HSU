@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Quản lý Cửa hàng</title>
+    <link href="~/assets/admin/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet prefetch" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" rel="stylesheet" href="~/assets/client/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/assets/client/css/style.css" />
+    
+
+    <script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartbyday", {
+	animationEnabled: true,
+	theme: "light2", // "light1", "dark1", "dark2"
+	exportEnabled: true,
+	title: {
+		text: "Thống kê doanh thu theo ngày"
+	},
+	data: [{
+		type: "column",
+		dataPoints:  @Html.Raw(ViewBag.ChartByDay)
+	}]
+    });
+    var chart2 = new CanvasJS.Chart("chartbymonth", {
+	animationEnabled: true,
+	theme: "light2", // "light1", "dark1", "dark2"
+	exportEnabled: true,
+	title: {
+		text: "Thống kê doanh thu theo tháng"
+	},
+	data: [{
+		type: "column",
+		dataPoints:  @Html.Raw(ViewBag.ChartByMonth)
+	}]
+});
+chart2.render();
+chart.render();
+
+}
+    </script>
+</head>
+<body class="sb-nav-fixed">
+    @{Html.RenderAction("Header", "Home");}
+    <div id="layoutSidenav">
+        @RenderPage("Navigation.cshtml")
+        @RenderBody()
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/assets/admin/js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="~/assets/admin/assets/demo/chart-area-demo.js"></script>
+    <script src="~/assets/admin/assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="~/assets/admin/assets/demo/datatables-demo.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+
+    
+    <script src="~/assets/admin/js/plugins/ckfinder/ckfinder.js"></script>
+
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>

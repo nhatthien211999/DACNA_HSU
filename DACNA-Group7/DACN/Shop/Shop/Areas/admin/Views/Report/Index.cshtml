@@ -1,0 +1,46 @@
+﻿@model List<Models.ViewModel.ReportViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+
+    
+
+}
+<link href="~/assets/jquery.datetimepicker.min.css" rel="stylesheet" />
+<script src="~/assets/jquery.datetimepicker.full.js"></script>
+<script src="~/assets/jquery.js"></script>
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-4">Báo cáo thống kê doanh thu</h1>
+            <div class="card mb-4">
+                
+                <div class="card-body">
+                    
+                    <a href="/admin/Report/ReportRevenueByDay"  class="btn btn-primary">Ngày</a>
+                    <a href="/admin/Report/ReportRevenueByMonth"  class="btn btn-primary">Tháng</a>
+                    <a href="/admin/Report/ReportRevenueByYear" class="btn btn-primary" >Năm</a>
+
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Copyright &copy; Your Website 2019</div>
+                <div>
+                    <a href="#">Privacy Policy</a>
+                    &middot;
+                    <a href="#">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+

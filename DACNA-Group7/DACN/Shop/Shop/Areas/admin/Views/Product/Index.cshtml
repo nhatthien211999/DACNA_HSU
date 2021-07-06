@@ -1,0 +1,106 @@
+﻿@model PagedList.IPagedList<Models.ViewModel.ProductViewModel>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-4">Danh sách sản phẩm</h1>
+            <div class="card mb-4">
+
+                <div class="card-body">
+                    @using (Html.BeginForm("Index", "Product", FormMethod.Get))
+                    {
+                        <div class="row ">
+                            <div class="form-group">
+                                <div class="col-md-8">
+                                    <div class="col-md-4">
+                                        
+                                        <a href="/admin/Product/Create" class="btn btn-primary glyphicon glyphicon-plus">Thêm mới</a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            <div class="form-group">
+                                <input type="text" value="@ViewBag.SearchString" name="searchString" size="50" />
+                                <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
+
+                            </div>
+                            
+                        </div>
+
+                    }
+                    <hr />
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered" cellspacing="0">
+                            <thead>
+                                <tr>
+
+                                    <th>Mã sản phẩm</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Hình</th>
+                                    <th>Mô tả</th>
+                                    <th>Giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Nhà cung cấp</th>
+                                    <th>Danh mục</th>
+                                    <th>#</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr id="row_@item.ID">
+
+                                    <td>@item.Code</td>
+                                    <td>@item.Name</td>
+                                    <td><img src="@item.Image" width="100px" /></td>
+                                    <td>@item.Descriptions</td>
+                                    <td>@item.Price</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@item.SupplierName</td>
+                                    <td>@item.CateName</td>
+                                    <td>
+                                        <a href="/admin/Product/Edit/@item.ID">Sửa</a>
+                                        @Ajax.ActionLink("Xóa", "Delete",new {@id=item.ID }, new AjaxOptions
+                                   {
+                                       Confirm = "Bản có muốn xóa bản ghi này ?",
+                                       OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                       HttpMethod = "Delete"
+                                   })
+                                    </td>
+
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = ViewBag.SearchString }))
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Copyright &copy; Your Website 2019</div>
+                <div>
+                    <a href="#">Privacy Policy</a>
+                    &middot;
+                    <a href="#">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+
